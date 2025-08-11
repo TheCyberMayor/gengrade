@@ -19,12 +19,13 @@ venv/
 .env.test.local
 .env.production.local
 FEEDBACK_SYSTEM_SUMMARY.md
+TRANSCRIPT_SYSTEM_SUMMARY.md
 QUICK_START.md
 config.env.example
 test_login.py
 debug.log
 debug-login.html
-debug_deparment.html
+debug_deparments.html
 test-lecturer-dashboard.html
 test-student-dashboard.html
 test-admin-dashboard.html

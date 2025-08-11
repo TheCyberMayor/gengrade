@@ -25,7 +25,6 @@ config.env.example
 test_login.py
 debug.log
 debug-login.html
-debug_deparments.html
 test-lecturer-dashboard.html
 test-student-dashboard.html
 test-admin-dashboard.html

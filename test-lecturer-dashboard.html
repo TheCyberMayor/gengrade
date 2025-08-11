@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer Feedback Dashboard Test - IntellGrade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">
+                    <i class="fas fa-chalkboard-teacher text-primary me-2"></i>
+                    Lecturer Feedback Dashboard Test
+                </h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-test-tube me-2"></i>Test Lecturer Feedback Analytics</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Test Lecturer Analytics</h6>
+                                <button class="btn btn-primary mb-3" onclick="testLecturerAnalytics()">
+                                    <i class="fas fa-chart-bar me-2"></i>Test Analytics
+                                </button>
+                                
+                                <h6>Test Sentiment Analysis</h6>
+                                <button class="btn btn-success mb-3" onclick="testSentimentAnalysis()">
+                                    <i class="fas fa-smile me-2"></i>Test Sentiment
+                                </button>
+                                
+                                <h6>Test Course Performance</h6>
+                                <button class="btn btn-info mb-3" onclick="testCoursePerformance()">
+                                    <i class="fas fa-trophy me-2"></i>Test Course Performance
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Test Results</h6>
+                                <div id="testResults" class="border p-3 bg-light">
+                                    <p class="text-muted">Test results will appear here...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-dashboard me-2"></i>Lecturer Dashboard Preview</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4 mb-4">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="stats-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon bg-primary">
+                                            <i class="fas fa-comments"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h3 class="mb-0" id="totalFeedback">0</h3>
+                                            <p class="text-muted mb-0">Total Feedback</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="stats-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon bg-success">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h3 class="mb-0" id="avgRating">0.0</h3>
+                                            <p class="text-muted mb-0">Average Rating</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="stats-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon bg-warning">
+                                            <i class="fas fa-book"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h3 class="mb-0" id="totalCourses">0</h3>
+                                            <p class="text-muted mb-0">Courses Rated</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="stats-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon bg-info">
+                                            <i class="fas fa-calendar"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h3 class="mb-0" id="recentFeedback">0</h3>
+                                            <p class="text-muted mb-0">This Month</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Rating Distribution -->
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">
+                                            <i class="fas fa-chart-bar me-2"></i>Rating Distribution
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="ratingDistribution">
+                                            <!-- Rating distribution will be loaded here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sentiment Analysis -->
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">
+                                            <i class="fas fa-smile me-2"></i>Feedback Sentiment
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="sentimentAnalysis">
+                                            <!-- Sentiment analysis will be loaded here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Course Performance with Average Ratings -->
+                        <div class="row g-4 mt-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">
+                                            <i class="fas fa-trophy me-2"></i>Course Performance & Average Ratings
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="coursePerformance">
+                                            <!-- Course performance with average ratings will be loaded here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/feedback-management.js"></script>
+    <script src="assets/js/lecturer.js"></script>
+    <script>
+        // Initialize lecturer dashboard for testing
+        let lecturerDashboard;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create a test lecturer dashboard instance
+            lecturerDashboard = new LecturerDashboard();
+            lecturerDashboard.currentLecturerId = 'LEC001'; // Test with Dr. John Smith
+            
+            // Load the analytics immediately
+            setTimeout(() => {
+                lecturerDashboard.loadFeedbackAnalytics();
+            }, 500);
+        });
+
+        // Test functions
+        function testLecturerAnalytics() {
+            const analytics = window.feedbackManager.getLecturerAnalytics('LEC001');
+            displayTestResult('Lecturer Analytics Test', analytics);
+        }
+        
+        function testSentimentAnalysis() {
+            const feedbacks = window.feedbackManager.getFeedbackByLecturer('LEC001');
+            const sentiment = window.feedbackManager.analyzeSentiment(feedbacks);
+            displayTestResult('Sentiment Analysis Test', sentiment);
+        }
+        
+        function testCoursePerformance() {
+            const analytics = window.feedbackManager.getLecturerAnalytics('LEC001');
+            displayTestResult('Course Performance Test', analytics.courses);
+        }
+        
+        function displayTestResult(testName, result) {
+            const resultsDiv = document.getElementById('testResults');
+            const timestamp = new Date().toLocaleTimeString();
+            const resultHtml = `
+                <div class="mb-2">
+                    <strong>${testName}</strong> (${timestamp})
+                    <pre class="mt-1 mb-0" style="font-size: 0.8rem;">${JSON.stringify(result, null, 2)}</pre>
+                </div>
+            `;
+            resultsDiv.innerHTML = resultHtml + resultsDiv.innerHTML;
+        }
+    </script>
+</body>
+</html> 

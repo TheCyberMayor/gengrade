@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback System Test - IntellGrade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">
+                    <i class="fas fa-comments text-primary me-2"></i>
+                    Feedback System Test
+                </h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-test-tube me-2"></i>Test Feedback Functionality</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Test Feedback Submission</h6>
+                                <button class="btn btn-primary mb-3" onclick="testFeedbackSubmission()">
+                                    <i class="fas fa-paper-plane me-2"></i>Test Submit Feedback
+                                </button>
+                                
+                                <h6>Test Analytics</h6>
+                                <button class="btn btn-success mb-3" onclick="testAnalytics()">
+                                    <i class="fas fa-chart-bar me-2"></i>Test Analytics
+                                </button>
+                                
+                                <h6>Test Export</h6>
+                                <button class="btn btn-info mb-3" onclick="testExport()">
+                                    <i class="fas fa-download me-2"></i>Test Export
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Test Results</h6>
+                                <div id="testResults" class="border p-3 bg-light">
+                                    <p class="text-muted">Test results will appear here...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-star me-2"></i>Test Rating Stars</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="ratingTestContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/feedback-management.js"></script>
+    <script>
+        // Test functions
+        function testFeedbackSubmission() {
+            const testFeedback = {
+                courseCode: 'TEST101',
+                courseTitle: 'Test Course',
+                lecturerId: 'TEST001',
+                lecturerName: 'Test Lecturer',
+                rating: 4,
+                comment: 'This is a test feedback submission',
+                semester: '2024/1'
+            };
+            
+            const result = window.feedbackManager.submitFeedback(testFeedback);
+            displayTestResult('Feedback Submission Test', result);
+        }
+        
+        function testAnalytics() {
+            const analytics = window.feedbackManager.getOverallAnalytics();
+            displayTestResult('Analytics Test', analytics);
+        }
+        
+        function testExport() {
+            const csvContent = window.feedbackManager.exportFeedbackToCSV();
+            displayTestResult('Export Test', { success: !!csvContent, length: csvContent.length });
+        }
+        
+        function displayTestResult(testName, result) {
+            const resultsDiv = document.getElementById('testResults');
+            const timestamp = new Date().toLocaleTimeString();
+            const resultHtml = `
+                <div class="mb-2">
+                    <strong>${testName}</strong> (${timestamp})
+                    <pre class="mt-1 mb-0" style="font-size: 0.8rem;">${JSON.stringify(result, null, 2)}</pre>
+                </div>
+            `;
+            resultsDiv.innerHTML = resultHtml + resultsDiv.innerHTML;
+        }
+        
+        // Initialize rating stars test
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('ratingTestContainer');
+            window.feedbackManager.createRatingStars(container, 3);
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dashboard - IntellGrade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .content-page {
+            display: none;
+            border: 2px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 200px;
+        }
+        .content-page.active {
+            display: block !important;
+            border-color: #28a745;
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+        .nav-link.active {
+            background-color: #007bff !important;
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <h5 class="text-center mb-4">Test Dashboard</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" data-page="overview">
+                                <i class="fas fa-tachometer-alt me-2"></i>Overview
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-page="courses">
+                                <i class="fas fa-book me-2"></i>Courses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-page="students">
+                                <i class="fas fa-users me-2"></i>Students
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button class="btn btn-sm btn-outline-secondary" onclick="testSimpleNavigation()">
+                            Test Navigation
+                        </button>
+                        <button class="btn btn-sm btn-outline-info" onclick="checkSimpleDOM()">
+                            Check DOM
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content Area -->
+                <div id="contentArea">
+                    <div id="overview" class="content-page active">
+                        <h3>Overview Page</h3>
+                        <p>This is the overview page content.</p>
+                        <div class="alert alert-success">Overview page is active!</div>
+                    </div>
+                    
+                    <div id="courses" class="content-page">
+                        <h3>Courses Page</h3>
+                        <p>This is the courses page content.</p>
+                        <div class="alert alert-info">Courses page is active!</div>
+                    </div>
+                    
+                    <div id="students" class="content-page">
+                        <h3>Students Page</h3>
+                        <p>This is the students page content.</p>
+                        <div class="alert alert-warning">Students page is active!</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Simple navigation test
+        function testSimpleNavigation() {
+            console.log('Testing simple navigation...');
+            
+            // Add click listeners to nav links
+            document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    console.log('Navigating to:', page);
+                    
+                    // Remove active from all nav links
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    // Add active to current link
+                    this.classList.add('active');
+                    
+                    // Hide all content pages
+                    document.querySelectorAll('.content-page').forEach(p => p.classList.remove('active'));
+                    // Show current page
+                    const currentPage = document.getElementById(page);
+                    if (currentPage) {
+                        currentPage.classList.add('active');
+                        console.log('Page shown:', page);
+                    }
+                });
+            });
+            
+            console.log('Event listeners added');
+        }
+
+        function checkSimpleDOM() {
+            console.log('=== Simple DOM Check ===');
+            console.log('Content pages:', document.querySelectorAll('.content-page'));
+            console.log('Active content page:', document.querySelector('.content-page.active'));
+            console.log('Nav links:', document.querySelectorAll('.nav-link[data-page]'));
+            console.log('Active nav link:', document.querySelector('.nav-link.active'));
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Simple dashboard loaded');
+            testSimpleNavigation();
+            checkSimpleDOM();
+        });
+    </script>
+</body>
+</html>

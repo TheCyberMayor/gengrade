@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer Dashboard - IntellGrade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block dashboard-sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h5><i class="fas fa-graduation-cap me-2"></i>IntellGrade</h5>
+                        <small class="text-muted">Lecturer Panel</small>
+                    </div>
+                    
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" data-page="overview">
+                                <i class="fas fa-tachometer-alt me-2"></i>Overview
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-page="courses">
+                                <i class="fas fa-book me-2"></i>My Courses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-page="results">
+                                <i class="fas fa-chart-bar me-2"></i>Results
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-page="feedback">
+                                <i class="fas fa-comments me-2"></i>Feedback Analytics
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-page="students">
+                                <i class="fas fa-users me-2"></i>Students
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-page="reports">
+                                <i class="fas fa-file-alt me-2"></i>Reports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-page="profile">
+                                <i class="fas fa-user-cog me-2"></i>Profile
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3">
+                            <a class="nav-link text-danger" href="#" onclick="auth.logout()">
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 dashboard-main">
+                <!-- Header -->
+                <div class="dashboard-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 id="pageTitle">Dashboard Overview</h4>
+                            <p class="text-muted mb-0">Welcome back, <span id="lecturerName">Lecturer</span></p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-outline-secondary me-2" onclick="checkDOMStructure()" title="Debug Navigation">
+                                <i class="fas fa-bug"></i>
+                            </button>
+                            <button class="btn btn-outline-info me-2" onclick="testNavigation()" title="Test Navigation">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="btn btn-outline-warning me-2" onclick="testContentLoading()" title="Test Content Loading">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-outline-success me-2" onclick="alert('Bootstrap JS is working!')" title="Test Bootstrap">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-outline-danger me-2" onclick="checkCSSStyles()" title="Check CSS Styles">
+                                <i class="fas fa-palette"></i>
+                            </button>
+                            <button class="btn btn-outline-dark me-2" onclick="manualNavigationTest()" title="Manual Navigation Test">
+                                <i class="fas fa-hand-pointer"></i>
+                            </button>
+                            <button class="btn btn-outline-primary me-2" onclick="simpleTest()" title="Simple Test">
+                                <i class="fas fa-flask"></i>
+                            </button>
+                            <button class="btn btn-outline-success me-2" onclick="testDashboardWorking()" title="Test Dashboard Working">
+                                <i class="fas fa-check-circle"></i>
+                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user me-2"></i>Lecturer
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" data-page="profile"><i class="fas fa-user-cog me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Area -->
+                <div id="contentArea">
+                    <!-- Overview Page -->
+                    <div id="overview" class="content-page active" style="display: block !important;">
+                        <div class="row g-4 mb-4">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="stats-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon bg-primary">
+                                            <i class="fas fa-book"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h3 class="mb-0">4</h3>
+                                            <p class="text-muted mb-0">Active Courses</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="stats-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon bg-success">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h3 class="mb-0">156</h3>
+                                            <p class="text-muted mb-0">Total Students</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="stats-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon bg-warning">
+                                            <i class="fas fa-comments"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h3 class="mb-0">23</h3>
+                                            <p class="text-muted mb-0">New Feedback</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="stats-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="stats-icon bg-info">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h3 class="mb-0">4.2</h3>
+                                            <p class="text-muted mb-0">Avg Rating</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Recent Feedback</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <div>
+                                                    <h6>CSC101 - Introduction to Computer Science</h6>
+                                                    <p class="text-muted mb-1">"Excellent teaching methods and clear explanations. The practical sessions were very helpful."</p>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-warning me-2">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                        </div>
+                                                        <small class="text-muted">2 hours ago</small>
+                                                    </div>
+                                                </div>
+                                                <span class="badge bg-success">Positive</span>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="mb-3">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <div>
+                                                    <h6>CSC201 - Data Structures</h6>
+                                                    <p class="text-muted mb-1">"The course content is comprehensive but could use more examples."</p>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="text-warning me-2">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                        </div>
+                                                        <small class="text-muted">1 day ago</small>
+                                                    </div>
+                                                </div>
+                                                <span class="badge bg-warning">Neutral</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Quick Actions</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-primary" onclick="navigateToPage('feedback')">
+                                                <i class="fas fa-comments me-2"></i>View All Feedback
+                                            </button>
+                                            <button class="btn btn-success" onclick="navigateToPage('reports')">
+                                                <i class="fas fa-file-alt me-2"></i>Generate Report
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other pages will be loaded dynamically -->
+                    <div id="courses" class="content-page" style="display: none;">
+                        <div class="text-center py-5">
+                            <i class="fas fa-book fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">My Courses</h5>
+                            <p class="text-muted">Loading courses...</p>
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="results" class="content-page" style="display: none;">
+                        <div class="text-center py-5">
+                            <i class="fas fa-chart-bar fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Results Management</h5>
+                            <p class="text-muted">Loading results...</p>
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="feedback" class="content-page" style="display: none;">
+                        <div class="text-center py-5">
+                            <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Feedback Analytics</h5>
+                            <p class="text-muted">Loading feedback analytics...</p>
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="students" class="content-page" style="display: none;">
+                        <div class="text-center py-5">
+                            <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">My Students</h5>
+                            <p class="text-muted">Loading students...</p>
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="reports" class="content-page" style="display: none;">
+                        <div class="text-center py-5">
+                            <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Reports</h5>
+                            <p class="text-muted">Loading reports...</p>
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="profile" class="content-page" style="display: none;">
+                        <div class="text-center py-5">
+                            <i class="fas fa-user-cog fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Lecturer Profile</h5>
+                            <p class="text-muted">Loading profile...</p>
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Upload Results Modal -->
+    <div class="modal fade" id="uploadResultsModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload Results</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Tab Navigation -->
+                    <ul class="nav nav-tabs" id="uploadTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="manual-tab" data-bs-toggle="tab" data-bs-target="#manual" type="button" role="tab">
+                                <i class="fas fa-edit me-2"></i>Manual Entry
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="csv-tab" data-bs-toggle="tab" data-bs-target="#csv" type="button" role="tab">
+                                <i class="fas fa-file-csv me-2"></i>CSV Upload
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="bulk-tab" data-bs-toggle="tab" data-bs-target="#bulk" type="button" role="tab">
+                                <i class="fas fa-upload me-2"></i>Bulk Upload
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content mt-3" id="uploadTabContent">
+                        <!-- Manual Entry Tab -->
+                        <div class="tab-pane fade show active" id="manual" role="tabpanel">
+                            <form id="manualResultForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="courseSelect" class="form-label">Course</label>
+                                            <select class="form-control" id="courseSelect" name="courseCode" required>
+                                                <option value="">Select course</option>
+                                                <option value="CSC101">CSC101 - Introduction to Computer Science</option>
+                                                <option value="CSC201">CSC201 - Data Structures</option>
+                                                <option value="CSC301">CSC301 - Algorithms</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="semesterSelect" class="form-label">Semester</label>
+                                            <select class="form-control" id="semesterSelect" name="semester" required>
+                                                <option value="">Select semester</option>
+                                                <option value="2024/1">2024/1 - First Semester</option>
+                                                <option value="2024/2">2024/2 - Second Semester</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="studentId" class="form-label">Student ID</label>
+                                            <input type="text" class="form-control" id="studentId" name="studentId" placeholder="STU001" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="studentName" class="form-label">Student Name</label>
+                                            <input type="text" class="form-control" id="studentName" name="studentName" placeholder="Student Name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="creditUnits" class="form-label">Credit Units</label>
+                                            <input type="number" class="form-control" id="creditUnits" name="creditUnits" min="1" max="6" value="3" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="score" class="form-label">Score</label>
+                                            <input type="number" class="form-control" id="score" name="score" min="0" max="100" placeholder="85" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="lecturer" class="form-label">Lecturer</label>
+                                            <input type="text" class="form-control" id="lecturer" name="lecturer" value="Dr. John Smith" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="courseTitle" class="form-label">Course Title</label>
+                                    <input type="text" class="form-control" id="courseTitle" name="courseTitle" placeholder="Course Title" required>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i>Upload Result
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- CSV Upload Tab -->
+                        <div class="tab-pane fade" id="csv" role="tabpanel">
+                            <div class="mb-3">
+                                <label for="csvFile" class="form-label">Upload CSV File</label>
+                                <input type="file" class="form-control" id="csvFile" accept=".csv">
+                                <small class="text-muted">
+                                    CSV should have columns: Student ID, Student Name, Course Code, Course Title, Credit Units, Score, Semester, Lecturer
+                                </small>
+                            </div>
+                            <div class="mb-3">
+                                <a href="#" class="text-decoration-none" onclick="downloadCSVTemplate()">
+                                    <i class="fas fa-download me-1"></i>Download CSV Template
+                                </a>
+                            </div>
+                            <div id="csvPreview"></div>
+                            <div class="d-grid mt-3">
+                                <button type="button" class="btn btn-success" onclick="processCSVUpload()">
+                                    <i class="fas fa-upload me-2"></i>Process CSV Upload
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bulk Upload Tab -->
+                        <div class="tab-pane fade" id="bulk" role="tabpanel">
+                            <div class="mb-3">
+                                <label for="bulkFile" class="form-label">Upload Excel/CSV File</label>
+                                <input type="file" class="form-control" id="bulkFile" accept=".xlsx,.csv">
+                                <small class="text-muted">Upload a file with multiple courses and students</small>
+                            </div>
+                            <div class="mb-3">
+                                <a href="#" class="text-decoration-none" onclick="downloadBulkTemplate()">
+                                    <i class="fas fa-download me-1"></i>Download Bulk Upload Template
+                                </a>
+                            </div>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-warning" onclick="processBulkUpload()">
+                                    <i class="fas fa-upload me-2"></i>Process Bulk Upload
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Upload Modal -->
+    <div class="modal fade" id="bulkUploadModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Bulk Upload Results</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bulkUploadForm">
+                        <div class="mb-3">
+                            <label for="bulkFile" class="form-label">Upload Excel/CSV File</label>
+                            <input type="file" class="form-control" id="bulkFile" accept=".xlsx,.csv" required>
+                            <small class="text-muted">Upload a file with multiple courses and students</small>
+                        </div>
+                        <div class="mb-3">
+                            <a href="#" class="text-decoration-none">
+                                <i class="fas fa-download me-1"></i>Download Template
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="bulkUpload()">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Details Modal -->
+    <div class="modal fade" id="studentDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Student Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="studentDetailsContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Details Modal -->
+    <div class="modal fade" id="courseDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Course Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="courseDetailsContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report View Modal -->
+    <div class="modal fade" id="reportViewModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Report View</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="reportViewContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="downloadCurrentReport()">
+                        <i class="fas fa-download me-2"></i>Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        console.log('Bootstrap loaded at:', new Date().toISOString());
+    </script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        console.log('Auth.js loaded at:', new Date().toISOString());
+        console.log('Auth object available:', typeof window.auth !== 'undefined');
+    </script>
+    <script src="../assets/js/api-client.js"></script>
+    <script>
+        console.log('API client loaded at:', new Date().toISOString());
+        console.log('API client available:', typeof window.apiClient !== 'undefined');
+    </script>
+    <script src="../assets/js/feedback-management.js"></script>
+    <script>
+        console.log('Feedback management loaded at:', new Date().toISOString());
+    </script>
+    <script src="../assets/js/result-management.js"></script>
+    <script>
+        console.log('Result management loaded at:', new Date().toISOString());
+    </script>
+    <script src="../assets/js/lecturer.js"></script>
+    <script>
+        console.log('Lecturer.js loaded at:', new Date().toISOString());
+        console.log('Lecturer dashboard available:', typeof window.lecturerDashboard !== 'undefined');
+    </script>
+</body>
+</html> 
